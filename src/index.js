@@ -12,6 +12,9 @@ let now = new Date();
 let hour = now.getHours();
 let minute = now.getMinutes();
 let minutes = now.getMinutes();
+if (minutes < 10) {
+  minutes = `0${minutes}`;
+}
 
 let days = [
   "Sunday",
