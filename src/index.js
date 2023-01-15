@@ -72,6 +72,8 @@ function displayWeatherCondition(response) {
   );
   let humidityElement = document.querySelector("#humidity");
   let windElement = document.querySelector("#wind");
+  humidityElement.innerHTML = response.data.main.humidity;
+  windElement.innerHTML = Math.round(response.data.wind.speed);
   let iconElement = document.querySelector("#icon");
   iconElement.setAttribute(
     "src",
@@ -104,6 +106,3 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
 let currentLocationButton = document.querySelector("#here-temp");
 currentLocationButton.addEventListener("click", getCurrentLocation);
-
-humidityElement.innerHTML = response.data.main.humidity;
-windElement.innerHTML = Math.round(response.data.wind.speed);
