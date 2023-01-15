@@ -97,3 +97,12 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
 let currentLocationButton = document.querySelector("#here-temp");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+
+// Nao sei o que é isto mas era suposto ser pra trocar a imagem correspondente à temperatura mas nao está a funcionar
+let iconElement = document.querySelector("#icon");
+iconElement.setAttribute(
+  "src",
+  `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+);
+descriptionElement.innerHTML = response.data.weather[0].description;
+iconElement.setAttribute("alt", response.data.weather[0].description);
