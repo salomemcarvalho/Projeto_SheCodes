@@ -70,6 +70,8 @@ function displayWeatherCondition(response) {
   document.querySelector("#main-temp").innerHTML = Math.round(
     response.data.main.temp
   );
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
 }
 function searchCity(city) {
   let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
@@ -97,3 +99,6 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
 let currentLocationButton = document.querySelector("#here-temp");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+
+humidityElement.innerHTML = response.data.main.humidity;
+windElement.innerHTML = Math.round(response.data.wind.speed);
