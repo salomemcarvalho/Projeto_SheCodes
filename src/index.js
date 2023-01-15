@@ -19,7 +19,7 @@ if (minutes < 10) {
 let days = [
   "Sunday",
   "Monday",
-  "Tueday",
+  "Tuesday",
   "Wednesday",
   "Thursday",
   "Friday",
@@ -70,6 +70,13 @@ function displayWeatherCondition(response) {
   document.querySelector("#main-temp").innerHTML = Math.round(
     response.data.main.temp
   );
+  let humidityElement = document.querySelector("#humidity");
+  let windElement = document.querySelector("#wind");
+  let iconElement = document.querySelector("#icon");
+  iconElement.setAttribute(
+    "src",
+    `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
+  );
 }
 function searchCity(city) {
   let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
@@ -77,17 +84,16 @@ function searchCity(city) {
   axios.get(apiUrl).then(displayWeatherCondition);
 }
 
+function handleSubmit(event) {
+  event.preventDefault();
+  let city = document.querySelector("#type-city").value;
+  searchCity(city);
+}
 function searchLocation(position) {
   let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayWeatherCondition);
-}
-function handleSubmit(event) {
-  event.preventDefault();
-  let city = document.querySelector("#type-city").value;
-  searchCity(city);
-  searchCity(cityInputElement.value);
 }
 
 function getCurrentLocation(event) {
@@ -99,11 +105,5 @@ searchForm.addEventListener("submit", handleSubmit);
 let currentLocationButton = document.querySelector("#here-temp");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 
-// Nao sei o que é isto mas era suposto ser pra trocar a imagem correspondente à temperatura mas nao está a funcionar
-let iconElement = document.querySelector("#icon");
-iconElement.setAttribute(
-  "src",
-  `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
-);
-descriptionElement.innerHTML = response.data.weather[0].description;
-iconElement.setAttribute("alt", response.data.weather[0].description);
+humidityElement.innerHTML = response.data.main.humidity;
+windElement.innerHTML = Math.round(response.data.wind.speed);
