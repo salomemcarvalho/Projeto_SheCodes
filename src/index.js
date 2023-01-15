@@ -19,7 +19,7 @@ if (minutes < 10) {
 let days = [
   "Sunday",
   "Monday",
-  "Tueday",
+  "Tuesday",
   "Wednesday",
   "Thursday",
   "Friday",
