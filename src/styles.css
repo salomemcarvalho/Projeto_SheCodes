@@ -1,12 +1,13 @@
 .container {
   margin: 30px auto;
   border: solid;
-  border-width: 3px;
+  border-width: 7px;
   border-color: #738e3c;
   border-radius: 10px;
   padding: 30px;
   background-color: white;
   max-width: 700px;
+  background-color: #945458;
 }
 .col-6 {
   text-align: center;
@@ -16,12 +17,13 @@
   margin: 30px 30px;
   border: solid;
   text-align: center;
-  border-width: 3px;
+  border-width: 7px;
   border-color: #738e3c;
   border-radius: 20px;
   padding: 30px 20px;
   background-color: white;
   max-width: 500px;
+  background-color: #e2d4c7;
 }
 .city {
   font-size: 32px;
@@ -32,4 +34,7 @@
 }
 .finallink {
   text-align: center;
+}
+body {
+  background-color: #e2d4c7;
 }
