@@ -81,7 +81,7 @@ function displayWeatherCondition(response) {
   );
 }
 function searchCity(city) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiKey = "5da7b2dc058f07286fea39c4cee516a3";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayWeatherCondition);
 }
@@ -92,7 +92,7 @@ function handleSubmit(event) {
   searchCity(city);
 }
 function searchLocation(position) {
-  let apiKey = "5f472b7acba333cd8a035ea85a0d4d4c";
+  let apiKey = "5da7b2dc058f07286fea39c4cee516a3";
   let apiUrl = `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${apiKey}&units=metric`;
 
   axios.get(apiUrl).then(displayWeatherCondition);
@@ -106,3 +106,22 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
 let currentLocationButton = document.querySelector("#here-temp");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+//Por o forecast
+function displayForecast() {
+  let forecastElement = document.querySelector("#forecast");
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
+  let forecastHTML = "";
+  days.forEach(function (day) {
+    forecastHTML =
+      forecastHTML +
+      `<span Class="weather-forecast-date">${day}</span>
+         <img 
+      src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="*" width="20">
+          <div class="weather-forecast-temperatures">
+        <span class="weather-forecast-temperature-actual">18º</span>
+          </div>
+          `;
+  });
+  forecastElement.innerHTML = forecastHTML;
+}
+displayForecast();
