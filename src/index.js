@@ -71,6 +71,7 @@ function getForecast(coordinates) {
   let apiUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={part}&appid=${apiKey}&units=metric`;
   console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
+  getForecast(response.data.coord);
 }
 //week 5
 function displayWeatherCondition(response) {
@@ -87,7 +88,6 @@ function displayWeatherCondition(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
-  getForecast(response.data.coord);
 }
 function searchCity(city) {
   let apiKey = "5da7b2dc058f07286fea39c4cee516a3";
@@ -117,20 +117,30 @@ let currentLocationButton = document.querySelector("#here-temp");
 currentLocationButton.addEventListener("click", getCurrentLocation);
 //Por o forecast
 function displayForecast(response) {
-  console.log(response.data.daily);
+  let forecast = response.data.daily;
   let forecastElement = document.querySelector("#forecast");
-  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
   let forecastHTML = "";
-  days.forEach(function (day) {
+  forecast.forEach(function (forecastDay) {
     forecastHTML =
       forecastHTML +
-      `<span Class="weather-forecast-date">${day}</span>
+      `<span Class="weather-forecast-date">${formatDay(forecastDay.dt)}</span>
          <img 
-      src="https://ssl.gstatic.com/onebox/weather/64/sunny.png" alt="*" width="20">
+      src="http://openweathermap.org/img/wn/${
+        forecastDay[0].icon
+      }@2x.png" alt="*" width="20">
           <div class="weather-forecast-temperatures">
-        <span class="weather-forecast-temperature-actual">18º</span>
+        <span class="weather-forecast-temperature-actual"> ${Math.round(
+          forecastDay.temp.day
+        )}ºC</span>
           </div>
           `;
   });
   forecastElement.innerHTML = forecastHTML;
 }
+function formatDay(timestamp) {
+  let date = new Date(timestamp * 1000);
+  let day = date.getDay();
+  let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+  return days[day];
+}
+// displayForecast();//  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
