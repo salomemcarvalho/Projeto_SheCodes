@@ -71,7 +71,6 @@ function getForecast(coordinates) {
   let apiUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={part}&appid=${apiKey}&units=metric`;
   console.log(apiUrl);
   axios.get(apiUrl).then(displayForecast);
-  getForecast(response.data.coord);
 }
 //week 5
 function displayWeatherCondition(response) {
@@ -88,6 +87,7 @@ function displayWeatherCondition(response) {
     "src",
     `http://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`
   );
+  getForecast(response.data.coord);
 }
 function searchCity(city) {
   let apiKey = "5da7b2dc058f07286fea39c4cee516a3";
@@ -115,6 +115,7 @@ let searchForm = document.querySelector("#search-form");
 searchForm.addEventListener("submit", handleSubmit);
 let currentLocationButton = document.querySelector("#here-temp");
 currentLocationButton.addEventListener("click", getCurrentLocation);
+
 //Por o forecast
 function displayForecast(response) {
   let forecast = response.data.daily;
@@ -126,7 +127,7 @@ function displayForecast(response) {
       `<span Class="weather-forecast-date">${formatDay(forecastDay.dt)}</span>
          <img 
       src="http://openweathermap.org/img/wn/${
-        forecastDay[0].icon
+        forecastDay.weather[0].icon
       }@2x.png" alt="*" width="20">
           <div class="weather-forecast-temperatures">
         <span class="weather-forecast-temperature-actual"> ${Math.round(
@@ -143,4 +144,5 @@ function formatDay(timestamp) {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return days[day];
 }
+search("aveiro");
 // displayForecast();//  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
