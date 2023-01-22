@@ -144,4 +144,5 @@ function formatDay(timestamp) {
   let days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
   return days[day];
 }
+searchCity("aveiro");
 // displayForecast();//  let days = ["Sun", "Mon", "Tue", "Wed", "Thu"];
