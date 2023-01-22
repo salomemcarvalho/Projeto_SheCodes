@@ -68,8 +68,7 @@ celsius.addEventListener("click", FarenheitToCelsius);
 function getForecast(coordinates) {
   console.log(coordinates);
   let apiKey = "5da7b2dc058f07286fea39c4cee516a3";
-  let apiUrl = `http://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={part}&appid=${apiKey}&units=metric`;
-  console.log(apiUrl);
+  let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${coordinates.lat}&lon=${coordinates.lon}&exclude={part}&appid=${apiKey}&units=metric`;
   axios.get(apiUrl).then(displayForecast);
 }
 //week 5
